@@ -3,12 +3,12 @@ require 'bigdecimal'
 
 # Cribbed from Unicorn Worker Killer, thanks!
 class GetProcessMem
-  private_class_method def self.number_to_bigdecimal(value)
+  def self.number_to_bigdecimal(value)
     BigDecimal(value)
   end
 
-  private def number_to_bigdecimal(value)
-    self.class.send(:number_to_bigdecimal, value)
+  class << self
+    private :number_to_bigdecimal
   end
 
   KB_TO_BYTE = number_to_bigdecimal 1024          # 2**10   = 1024
